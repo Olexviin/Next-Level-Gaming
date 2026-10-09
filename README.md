@@ -41,3 +41,8 @@ During development, the project transitioned from a standard React Navigation se
 - **Deleted:** `src/navigation/AppNavigator.tsx` and `src/navigation/TabNavigator.tsx`.
 - **Added:** The `src/app/` directory. This directory now handles all routing.
 - **Wrapper Pattern:** Your actual UI code remains in `src/screens/`. The files inside `src/app/` are tiny "wrapper" files that simply import and export the screens from `src/screens/`. This keeps UI logic separate from routing logic.
+
+## Changelog
+
+- **2026-10-09:** Replaced the default splash image with the NGL logo on a theme-matched dark background and added the logo to the home screen.
+- **2026-10-09:** Updated the Home screen to use the supplied original-color NGL logo and added the arena description.

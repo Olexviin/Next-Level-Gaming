@@ -7,6 +7,7 @@ import {
     TouchableOpacity,
     View,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { CustomButton } from "../components/CustomButton";
 import { CustomInput } from "../components/CustomInput";
 import { COLORS, SIZES } from "../constants/theme";
@@ -83,80 +84,89 @@ export const CalculateFeesScreen = () => {
   };
 
   return (
-    <ScrollView style={styles.container}>
-      <Text style={styles.header}>CALCULATE FEES</Text>
+    <SafeAreaView edges={["top"]} style={styles.safeArea}>
+      <ScrollView style={styles.container}>
+        <Text style={styles.header}>CALCULATE FEES</Text>
 
-      <Text style={styles.sectionTitle}>YOUR DETAILS</Text>
-      <CustomInput
-        label="Name"
-        placeholder="John Doe"
-        value={name}
-        onChangeText={setName}
-        error={errors.name}
-      />
-      <CustomInput
-        label="Phone"
-        placeholder="0821234567"
-        value={phone}
-        onChangeText={setPhone}
-        keyboardType="phone-pad"
-        error={errors.phone}
-      />
-      <CustomInput
-        label="Email"
-        placeholder="john@example.com"
-        value={email}
-        onChangeText={setEmail}
-        keyboardType="email-address"
-        error={errors.email}
-      />
-
-      <Text style={styles.sectionTitle}>
-        SELECT SERVICES ({selectedIds.length} selected)
-      </Text>
-      {availableServices.map((service) => {
-        const isSelected = selectedIds.includes(service.id);
-        return (
-          <TouchableOpacity
-            key={service.id}
-            style={[styles.checkboxRow, isSelected && styles.checkboxSelected]}
-            onPress={() => toggleSelection(service.id)}
-          >
-            <View
-              style={[styles.checkbox, isSelected && styles.checkboxChecked]}
-            />
-            <Text style={styles.checkboxLabel}>{service.name}</Text>
-            <Text style={styles.checkboxPrice}>R {service.price}</Text>
-          </TouchableOpacity>
-        );
-      })}
-
-      <View style={styles.buttonRow}>
-        <CustomButton
-          title="Reset"
-          variant="outline"
-          onPress={() => {
-            setSelectedIds([]);
-            setTotal(null);
-          }}
+        <Text style={styles.sectionTitle}>YOUR DETAILS</Text>
+        <CustomInput
+          label="Name"
+          placeholder="John Doe"
+          value={name}
+          onChangeText={setName}
+          error={errors.name}
         />
-        <CustomButton title="Calculate" onPress={handleCalculate} />
-      </View>
+        <CustomInput
+          label="Phone"
+          placeholder="0821234567"
+          value={phone}
+          onChangeText={setPhone}
+          keyboardType="phone-pad"
+          error={errors.phone}
+        />
+        <CustomInput
+          label="Email"
+          placeholder="john@example.com"
+          value={email}
+          onChangeText={setEmail}
+          keyboardType="email-address"
+          error={errors.email}
+        />
 
-      {total !== null && (
-        <View style={styles.totalCard}>
-          <Text style={styles.totalText}>Total (incl. 15% VAT):</Text>
-          <Text style={styles.totalAmount}>R {total.toFixed(2)}</Text>
-          <Text style={styles.disclaimer}>
-            * This is a quoted fee and not a formal invoice.
-          </Text>
+        <Text style={styles.sectionTitle}>
+          SELECT SERVICES ({selectedIds.length} selected)
+        </Text>
+        {availableServices.map((service) => {
+          const isSelected = selectedIds.includes(service.id);
+          return (
+            <TouchableOpacity
+              key={service.id}
+              style={[
+                styles.checkboxRow,
+                isSelected && styles.checkboxSelected,
+              ]}
+              onPress={() => toggleSelection(service.id)}
+            >
+              <View
+                style={[styles.checkbox, isSelected && styles.checkboxChecked]}
+              />
+              <Text style={styles.checkboxLabel}>{service.name}</Text>
+              <Text style={styles.checkboxPrice}>R {service.price}</Text>
+            </TouchableOpacity>
+          );
+        })}
+
+        <View style={styles.buttonRow}>
+          <CustomButton
+            title="Reset"
+            variant="outline"
+            onPress={() => {
+              setSelectedIds([]);
+              setTotal(null);
+            }}
+          />
+          <CustomButton title="Calculate" onPress={handleCalculate} />
         </View>
-      )}
-    </ScrollView>
+
+        {total !== null && (
+          <View style={styles.totalCard}>
+            <Text style={styles.totalText}>Total (incl. 15% VAT):</Text>
+            <Text style={styles.totalAmount}>R {total.toFixed(2)}</Text>
+            <Text style={styles.disclaimer}>
+              * This is a quoted fee and not a formal invoice.
+            </Text>
+          </View>
+        )}
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: COLORS.background,
+  },
   container: {
     flex: 1,
     backgroundColor: COLORS.background,

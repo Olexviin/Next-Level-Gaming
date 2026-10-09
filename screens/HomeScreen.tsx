@@ -9,13 +9,15 @@ export const HomeScreen = () => {
   return (
     <View style={styles.container}>
       <Image
-        source={require("../assets/images/logo-glow.png")}
+        source={require("../assets/images/ngl-home-logo.png")}
         style={styles.logo}
         resizeMode="contain"
       />
       <Text style={styles.title}>Next Level Gaming</Text>
       <Text style={styles.subtitle}>
-        Experience the ultimate esports arena.
+        Level up your gaming experience. From casual play to competitive
+        esports, NGL offers the ultimate high-tech arena for individuals,
+        teams, and corporate events.
       </Text>
 
       <View style={styles.exploreSection}>
@@ -61,7 +63,13 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
   },
-  subtitle: { color: COLORS.textMuted, textAlign: "center", marginBottom: 40 },
+  subtitle: {
+    color: COLORS.textMuted,
+    fontSize: SIZES.body,
+    lineHeight: 24,
+    textAlign: "center",
+    marginBottom: 24,
+  },
   exploreSection: { marginTop: 20 },
   sectionTitle: {
     color: COLORS.secondary,

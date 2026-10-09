@@ -5,11 +5,12 @@ import {
     TouchableOpacity,
     View,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS, SIZES } from "../constants/theme";
 
 export const ContactScreen = () => {
   return (
-    <View style={styles.container}>
+    <SafeAreaView edges={["top"]} style={styles.container}>
       <Text style={styles.header}>CONTACT US</Text>
 
       <View style={styles.card}>
@@ -33,7 +34,7 @@ export const ContactScreen = () => {
       >
         <Text style={styles.mapText}>GET DIRECTIONS (Map)</Text>
       </TouchableOpacity>
-    </View>
+    </SafeAreaView>
   );
 };
 

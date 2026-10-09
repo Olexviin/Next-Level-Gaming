@@ -5,6 +5,7 @@ import {
     TouchableOpacity,
     View,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { SERVICES, type ServiceCategory } from "../constants/services";
 import { COLORS, SIZES } from "../constants/theme";
@@ -22,71 +23,77 @@ export const ServicesOverviewScreen = () => {
       : SERVICES.filter((service) => service.type === selectedCategory);
 
   return (
-    <ScrollView style={styles.container}>
-      <Text style={styles.header}>OUR SERVICES</Text>
+    <SafeAreaView edges={["top"]} style={styles.safeArea}>
+      <ScrollView style={styles.container}>
+        <Text style={styles.header}>OUR SERVICES</Text>
 
-      <View style={styles.filterRow}>
-        {(
-          [
-            ["all", "All"],
-            ["package", "Packages"],
-            ["experience", "Experiences"],
-          ] as const
-        ).map(([value, label]) => (
+        <View style={styles.filterRow}>
+          {(
+            [
+              ["all", "All"],
+              ["package", "Packages"],
+              ["experience", "Experiences"],
+            ] as const
+          ).map(([value, label]) => (
+            <TouchableOpacity
+              key={value}
+              accessibilityRole="button"
+              accessibilityState={{ selected: selectedCategory === value }}
+              style={[
+                styles.filterButton,
+                selectedCategory === value && styles.filterButtonSelected,
+              ]}
+              onPress={() =>
+                router.setParams({
+                  category: value === "all" ? undefined : value,
+                })
+              }
+            >
+              <Text
+                style={[
+                  styles.filterText,
+                  selectedCategory === value && styles.filterTextSelected,
+                ]}
+              >
+                {label}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+
+        {visibleServices.map((service) => (
           <TouchableOpacity
-            key={value}
+            key={service.id}
             accessibilityRole="button"
-            accessibilityState={{ selected: selectedCategory === value }}
-            style={[
-              styles.filterButton,
-              selectedCategory === value && styles.filterButtonSelected,
-            ]}
+            style={styles.card}
             onPress={() =>
-              router.setParams({
-                category: value === "all" ? undefined : value,
+              router.push({
+                pathname: "/service/[id]",
+                params: { id: service.id },
               })
             }
           >
-            <Text
-              style={[
-                styles.filterText,
-                selectedCategory === value && styles.filterTextSelected,
-              ]}
-            >
-              {label}
-            </Text>
+            <View>
+              <Text style={styles.cardTitle}>{service.name}</Text>
+              <Text style={styles.cardType}>
+                {service.type === "package"
+                  ? "Gaming package"
+                  : "Individual experience"}
+              </Text>
+            </View>
+            <Text style={styles.cardPrice}>{service.price}</Text>
           </TouchableOpacity>
         ))}
-      </View>
-
-      {visibleServices.map((service) => (
-        <TouchableOpacity
-          key={service.id}
-          accessibilityRole="button"
-          style={styles.card}
-          onPress={() =>
-            router.push({
-              pathname: "/service/[id]",
-              params: { id: service.id },
-            })
-          }
-        >
-          <View>
-            <Text style={styles.cardTitle}>{service.name}</Text>
-            <Text style={styles.cardType}>
-              {service.type === "package"
-                ? "Gaming package"
-                : "Individual experience"}
-            </Text>
-          </View>
-          <Text style={styles.cardPrice}>{service.price}</Text>
-        </TouchableOpacity>
-      ))}
-    </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: COLORS.background,
+  },
   container: {
     flex: 1,
     backgroundColor: COLORS.background,

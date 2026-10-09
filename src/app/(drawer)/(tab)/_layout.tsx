@@ -1,6 +1,6 @@
 import { Tabs } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { COLORS } from "../../../constants/theme";
+import { COLORS } from "../../../../constants/theme";
 
 export default function TabLayout() {
   return (
@@ -51,7 +51,6 @@ export default function TabLayout() {
           ),
         }}
       />
-      <Tabs.Screen name="conatct" options={{ href: null }} />
     </Tabs>
   );
 }
