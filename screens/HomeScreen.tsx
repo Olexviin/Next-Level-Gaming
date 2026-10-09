@@ -1,8 +1,11 @@
 import { Image, StyleSheet, Text, View } from "react-native";
+import { useRouter } from "expo-router";
 import { CustomButton } from "../components/CustomButton";
 import { COLORS, SIZES } from "../constants/theme";
 
-export const HomeScreen = ({ navigation }: any) => {
+export const HomeScreen = () => {
+  const router = useRouter();
+
   return (
     <View style={styles.container}>
       <Image
@@ -20,12 +23,22 @@ export const HomeScreen = ({ navigation }: any) => {
         <View style={styles.row}>
           <CustomButton
             title="Packages"
-            onPress={() => navigation.navigate("ServicesOverview")}
+            onPress={() =>
+              router.navigate({
+                pathname: "/(tab)/services",
+                params: { category: "package" },
+              })
+            }
             variant="secondary"
           />
           <CustomButton
             title="Experiences"
-            onPress={() => navigation.navigate("ServicesOverview")}
+            onPress={() =>
+              router.navigate({
+                pathname: "/(tab)/services",
+                params: { category: "experience" },
+              })
+            }
             variant="outline"
           />
         </View>

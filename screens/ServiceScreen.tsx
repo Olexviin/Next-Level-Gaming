@@ -2,55 +2,86 @@ import {
     ScrollView,
     StyleSheet,
     Text,
-    TouchableOpacity
+    TouchableOpacity,
+    View,
 } from "react-native";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import { SERVICES, type ServiceCategory } from "../constants/services";
 import { COLORS, SIZES } from "../constants/theme";
 
-const services = [
-  { id: "1", name: "Ultimate Gamer Pass", price: "R 150/hr", type: "package" },
-  {
-    id: "2",
-    name: "VIP Gaming Experience",
-    price: "R 250/hr",
-    type: "package",
-  },
-  { id: "3", name: "E-Sports Training", price: "R 200/hr", type: "package" },
-  { id: "4", name: "VR Solo", price: "R 100/hr", type: "experience" },
-  { id: "5", name: "Sim Racing", price: "R 120/hr", type: "experience" },
-];
+type ServiceFilter = ServiceCategory | "all";
 
-export const ServicesOverviewScreen = ({ navigation }: any) => {
+export const ServicesOverviewScreen = () => {
+  const router = useRouter();
+  const { category } = useLocalSearchParams<{ category?: ServiceFilter }>();
+  const selectedCategory: ServiceFilter =
+    category === "package" || category === "experience" ? category : "all";
+  const visibleServices =
+    selectedCategory === "all"
+      ? SERVICES
+      : SERVICES.filter((service) => service.type === selectedCategory);
+
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.header}>OUR SERVICES</Text>
 
-      <Text style={styles.sectionTitle}>GAMING PACKAGES</Text>
-      {services
-        .filter((s) => s.type === "package")
-        .map((service) => (
+      <View style={styles.filterRow}>
+        {(
+          [
+            ["all", "All"],
+            ["package", "Packages"],
+            ["experience", "Experiences"],
+          ] as const
+        ).map(([value, label]) => (
           <TouchableOpacity
-            key={service.id}
-            style={styles.card}
-            onPress={() => navigation.navigate("ServiceDetail", { service })}
+            key={value}
+            accessibilityRole="button"
+            accessibilityState={{ selected: selectedCategory === value }}
+            style={[
+              styles.filterButton,
+              selectedCategory === value && styles.filterButtonSelected,
+            ]}
+            onPress={() =>
+              router.setParams({
+                category: value === "all" ? undefined : value,
+              })
+            }
           >
-            <Text style={styles.cardTitle}>{service.name}</Text>
-            <Text style={styles.cardPrice}>{service.price}</Text>
+            <Text
+              style={[
+                styles.filterText,
+                selectedCategory === value && styles.filterTextSelected,
+              ]}
+            >
+              {label}
+            </Text>
           </TouchableOpacity>
         ))}
+      </View>
 
-      <Text style={styles.sectionTitle}>INDIVIDUAL EXPERIENCES</Text>
-      {services
-        .filter((s) => s.type === "experience")
-        .map((service) => (
-          <TouchableOpacity
-            key={service.id}
-            style={styles.card}
-            onPress={() => navigation.navigate("ServiceDetail", { service })}
-          >
+      {visibleServices.map((service) => (
+        <TouchableOpacity
+          key={service.id}
+          accessibilityRole="button"
+          style={styles.card}
+          onPress={() =>
+            router.push({
+              pathname: "/service/[id]",
+              params: { id: service.id },
+            })
+          }
+        >
+          <View>
             <Text style={styles.cardTitle}>{service.name}</Text>
-            <Text style={styles.cardPrice}>{service.price}</Text>
-          </TouchableOpacity>
-        ))}
+            <Text style={styles.cardType}>
+              {service.type === "package"
+                ? "Gaming package"
+                : "Individual experience"}
+            </Text>
+          </View>
+          <Text style={styles.cardPrice}>{service.price}</Text>
+        </TouchableOpacity>
+      ))}
     </ScrollView>
   );
 };
@@ -67,13 +98,25 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 20,
   },
-  sectionTitle: {
-    color: COLORS.secondary,
-    fontSize: SIZES.h2,
-    fontWeight: "bold",
-    marginTop: 20,
-    marginBottom: 10,
+  filterRow: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 8,
+    marginBottom: 16,
   },
+  filterButton: {
+    borderColor: COLORS.border,
+    borderRadius: SIZES.borderRadius,
+    borderWidth: 1,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+  },
+  filterButtonSelected: {
+    backgroundColor: COLORS.primary,
+    borderColor: COLORS.primary,
+  },
+  filterText: { color: COLORS.textMuted, fontWeight: "600" },
+  filterTextSelected: { color: COLORS.text },
   card: {
     backgroundColor: COLORS.cardBg,
     padding: 16,
@@ -85,6 +128,7 @@ const styles = StyleSheet.create({
     borderColor: COLORS.border,
   },
   cardTitle: { color: COLORS.text, fontSize: SIZES.body, fontWeight: "600" },
+  cardType: { color: COLORS.textMuted, fontSize: 12, marginTop: 4 },
   cardPrice: {
     color: COLORS.primary,
     fontSize: SIZES.body,

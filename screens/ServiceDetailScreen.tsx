@@ -1,9 +1,17 @@
+import { Redirect, useLocalSearchParams, useRouter } from "expo-router";
 import { StyleSheet, Text, View } from "react-native";
 import { CustomButton } from "../components/CustomButton";
+import { SERVICES } from "../constants/services";
 import { COLORS, SIZES } from "../constants/theme";
 
-export const ServiceDetailScreen = ({ route, navigation }: any) => {
-  const { service } = route.params;
+export const ServiceDetailScreen = () => {
+  const router = useRouter();
+  const { id } = useLocalSearchParams<{ id: string }>();
+  const service = SERVICES.find((item) => item.id === id);
+
+  if (!service) {
+    return <Redirect href="/(tab)/services" />;
+  }
 
   return (
     <View style={styles.container}>
@@ -19,11 +27,11 @@ export const ServiceDetailScreen = ({ route, navigation }: any) => {
 
       <CustomButton
         title="GET A QUOTE"
-        onPress={() => navigation.navigate("CalculateFees")}
+        onPress={() => router.navigate("/(tab)/fees")}
       />
       <CustomButton
         title="Back to Services"
-        onPress={() => navigation.goBack()}
+        onPress={() => router.back()}
         variant="outline"
       />
     </View>

@@ -8,7 +8,7 @@ export default function TabLayout() {
       screenOptions={{
         headerShown: false, // We handle headers in the main Stack layout
         tabBarStyle: {
-          backgroundColor: COLORS.cardBg,
+          backgroundColor: COLORS.background,
           borderTopColor: COLORS.border,
         },
         tabBarActiveTintColor: COLORS.primary,
