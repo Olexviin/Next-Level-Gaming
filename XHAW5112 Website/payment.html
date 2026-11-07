@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Payment - XHAW5112 Website</title>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <nav class="site-nav">
+            <div class="site-nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="tournaments.html">Tournaments</a>
+                <a href="membership.html">Members</a>
+                <a href="contact.html">Contact</a>
+                <a href="payment.html">Payment</a>
+            </div>
+            <a href="payment.html" class="btn-book">BOOK NOW</a>
+        </nav>
+        <div class="page-hero">
+            <h1>Payment and Quote</h1>
+            <p>Choose your packages, see the cost of each item and get your total including discount and VAT.</p>
+            <p class="payment-note">Discounts: 1 booking - none | 2 bookings - 5% | 3 bookings - 10% | more than 3 bookings - 15%. VAT of 15% is added after the discount.</p>
+        </div>
+        <div class="payment-layout">
+            <section class="payment-panel">
+                <h2>Your Booking</h2>
+                <form id="booking-form" novalidate>
+                    <div class="form-field">
+                        <label for="customer-name">Full name</label>
+                        <input type="text" id="customer-name" name="customer-name" autocomplete="name" aria-describedby="customer-name-error">
+                        <p class="form-error" id="customer-name-error" hidden></p>
+                    </div>
+                    <div class="form-field">
+                        <label for="customer-phone">Phone number</label>
+                        <input type="tel" id="customer-phone" name="customer-phone" autocomplete="tel" placeholder="e.g. 0821234567" aria-describedby="customer-phone-error">
+                        <p class="form-error" id="customer-phone-error" hidden></p>
+                    </div>
+                    <div class="form-field">
+                        <label for="customer-email">Email address</label>
+                        <input type="email" id="customer-email" name="customer-email" autocomplete="email" aria-describedby="customer-email-error">
+                        <p class="form-error" id="customer-email-error" hidden></p>
+                    </div>
+                    <div class="form-field">
+                        <label for="payment-method">Payment method</label>
+                        <select id="payment-method" name="payment-method" aria-describedby="payment-method-error">
+                            <option value="">Select a payment method</option>
+                            <option value="Card on arrival">Card on arrival</option>
+                            <option value="EFT">EFT / bank transfer</option>
+                            <option value="Cash on arrival">Cash on arrival</option>
+                        </select>
+                        <p class="form-error" id="payment-method-error" hidden></p>
+                    </div>
+                    <fieldset class="package-options" id="package-options" aria-describedby="package-options-error">
+                        <legend>Choose your packages</legend>
+                    </fieldset>
+                    <p class="form-error" id="package-options-error" hidden></p>
+                    <div class="form-actions">
+                        <button type="button" class="btn-primary" id="calculate-button">Calculate Total</button>
+                        <button type="submit" class="btn-outline">Confirm Booking Request</button>
+                    </div>
+                    <p class="payment-note">No card details are collected on this site. A consultant will contact you to confirm your booking and payment.</p>
+                </form>
+            </section>
+            <section class="payment-panel" aria-live="polite">
+                <h2>Your Quote</h2>
+                <p class="quote-placeholder" id="quote-placeholder">Select at least one package and press Calculate Total to see the cost of each item.</p>
+                <div class="quote-table-wrap" id="quote-table-wrap" hidden>
+                    <table class="quote-table">
+                        <caption class="quote-caption" id="quote-caption"></caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">Item</th>
+                                <th scope="col">Fee</th>
+                                <th scope="col">After discount</th>
+                            </tr>
+                        </thead>
+                        <tbody id="quote-items"></tbody>
+                        <tfoot id="quote-totals"></tfoot>
+                    </table>
+                    <p class="payment-note">This is a quoted fee and not a formal invoice.</p>
+                </div>
+                <p class="form-message" id="form-message" hidden></p>
+            </section>
+        </div>
+        <div class="site-footer">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="tournaments.html">Tournaments</a>
+            <a href="membership.html">Members</a>
+            <a href="contact.html">Contact</a>
+            <a href="payment.html">Payment</a>
+        </div>
+        <div class="content-section">
+            <p>&copy; Gaming &amp; E-Sports Arena-Johannesburg South Africa-SME Registered-Privacy Policy-Terms of Service</p>
+        </div>
+        <script src="js/payment.js"></script>
+    </body>
+</html>

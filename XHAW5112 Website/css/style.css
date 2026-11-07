@@ -1,0 +1,741 @@
+/* ==========================================================================
+   Next Level Gaming & Esports Arena - Stylesheet
+   Colour palette: Deep Space, Electric Purple, Cyan Blue (plus white text)
+   ========================================================================== */
+
+/* ---------- 1. Design tokens ---------- */
+:root {
+  --color-deep-space: #0B0C10;
+  --color-electric-purple: #8A2BE2;
+  --color-cyan-blue: #00FFFF;
+  --color-white: #FFFFFF;
+
+  /* Tints of white used on the dark background */
+  --color-surface: rgba(255, 255, 255, 0.06);
+  --color-line: rgba(255, 255, 255, 0.12);
+  --color-text-soft: rgba(255, 255, 255, 0.8);
+  --color-text-muted: rgba(255, 255, 255, 0.65);
+
+  /* Text shades used on the white package cards */
+  --color-card-text: rgba(11, 12, 16, 0.85);
+  --color-card-meta: rgba(11, 12, 16, 0.6);
+}
+
+/* ---------- 2. Base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--color-deep-space);
+  color: var(--color-white);
+  font-family: Arial, sans-serif;
+  margin: 0;
+}
+
+img {
+  max-width: 100%;
+}
+
+a {
+  color: var(--color-cyan-blue);
+}
+
+/* Visible keyboard focus on every interactive element */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--color-cyan-blue);
+  outline-offset: 2px;
+}
+
+/* ---------- 3. Layout helpers ---------- */
+/* Centred header area (logo, page title, intro line) */
+.page-hero,
+/* Centred body copy and copyright line */
+.content-section {
+  text-align: center;
+  padding: 0 20px;
+}
+
+.page-hero h1,
+.content-section h1 {
+  font-size: clamp(1.5rem, 5vw, 2rem);
+}
+
+/* Row of three photos under the page header */
+.image-gallery {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+  padding: 0 15px;
+}
+
+.image-gallery img {
+  width: 30%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* Centred, borderless list used for features, contact details and stats */
+.feature-list {
+  list-style: none;
+  padding: 0;
+  text-align: center;
+  margin: 20px 0;
+  color: var(--color-text-soft);
+  font-size: 14px;
+}
+
+.feature-list li {
+  margin: 10px 0;
+  border-bottom: 1px solid var(--color-line);
+  padding-bottom: 8px;
+}
+
+/* ---------- 4. Logo ---------- */
+/* Crops the logo image into a shield shape */
+.logo-shield {
+  width: 150px;
+  height: 175px;
+  background: var(--color-deep-space);
+  border-radius: 15px 15px 50% 50% / 15px 15px 90% 90%;
+  overflow: hidden;
+  margin: 50px auto;
+}
+
+.logo-shield img {
+  width: 150px;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+
+/* ---------- 5. Navigation and footer ---------- */
+.site-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  background: var(--color-surface);
+  padding: 12px 25px;
+  border-bottom: 2px solid var(--color-cyan-blue);
+}
+
+.site-nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+}
+
+.site-nav-links a {
+  color: var(--color-text-soft);
+  text-decoration: none;
+  padding: 6px 0;
+  font-size: 15px;
+}
+
+.site-nav-links a:hover {
+  color: var(--color-electric-purple);
+  text-shadow: 0 0 10px var(--color-electric-purple);
+}
+
+.site-footer {
+  background: var(--color-surface);
+  padding: 20px 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px 30px;
+  border-top: 2px solid var(--color-cyan-blue);
+}
+
+.site-footer a {
+  color: var(--color-text-soft);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.site-footer a:hover {
+  color: var(--color-electric-purple);
+  text-shadow: 0 0 10px var(--color-electric-purple);
+}
+
+/* ---------- 6. Buttons ---------- */
+/* "Book Now" button in the navigation bar */
+.btn-book {
+  background: var(--color-electric-purple);
+  color: var(--color-white);
+  padding: 10px 26px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+  border: 2px solid var(--color-electric-purple);
+  transition: 0.3s;
+}
+
+.btn-book:hover {
+  background: transparent;
+  color: var(--color-electric-purple);
+  box-shadow: 0 0 15px var(--color-electric-purple);
+}
+
+/* Main call-to-action (filled purple pill) and secondary action (cyan outline pill) */
+.btn-primary,
+.btn-outline {
+  padding: 14px 32px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+  display: inline-block;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.btn-primary {
+  background: var(--color-electric-purple);
+  color: var(--color-white);
+  border: 2px solid var(--color-electric-purple);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--color-cyan-blue);
+  border: 2px solid var(--color-cyan-blue);
+}
+
+/* "View Details" button on a package card */
+.btn-details {
+  display: inline-block;
+  background-color: var(--color-deep-space);
+  color: var(--color-white);
+  padding: 10px 15px;
+  text-decoration: none;
+  margin-top: 10px;
+}
+
+.btn-details:hover {
+  background-color: var(--color-electric-purple);
+  color: var(--color-white);
+}
+
+/* "Join" button at the bottom of a membership plan */
+.btn-join {
+  display: block;
+  background: var(--color-cyan-blue);
+  color: var(--color-deep-space);
+  text-decoration: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn-join:hover {
+  background: var(--color-white);
+}
+
+/* ---------- 7. Tournament package cards ---------- */
+.package-grid {
+  display: flex;
+  gap: 20px;
+  padding: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.package-card {
+  background-color: var(--color-white);
+  width: 300px;
+  max-width: 100%;
+}
+
+.package-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.package-card-body {
+  padding: 15px;
+}
+
+.package-card-body h3 {
+  margin: 0 0 5px 0;
+  color: var(--color-deep-space);
+}
+
+.package-card-body p {
+  color: var(--color-card-text);
+}
+
+/* Price and player count line under the package name */
+.package-card-meta {
+  color: var(--color-card-meta);
+  font-style: italic;
+}
+
+/* ---------- 8. Membership plans ---------- */
+.plans-section {
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.plans-title {
+  color: var(--color-cyan-blue);
+  font-size: 32px;
+  margin-bottom: 5px;
+}
+
+.plans-subtitle {
+  color: var(--color-text-muted);
+  margin-bottom: 30px;
+}
+
+.plans-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.plan-card {
+  background: var(--color-surface);
+  border: 2px solid transparent;
+  border-radius: 15px;
+  width: 354px;
+  max-width: 100%;
+  padding: 25px;
+  position: relative;
+  transition: 0.3s;
+}
+
+.plan-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--color-cyan-blue);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+}
+
+.plan-card--featured {
+  border-color: var(--color-cyan-blue);
+  transform: scale(1.05);
+}
+
+.plan-card h3 {
+  color: var(--color-white);
+  margin: 10px 0;
+}
+
+/* "MOST POPULAR" label on the featured plan */
+.plan-featured-tag {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-cyan-blue);
+  color: var(--color-deep-space);
+  font-weight: bold;
+  font-size: 12px;
+  padding: 5px 15px;
+  border-radius: 20px;
+}
+
+/* Tier label (Basic, Pro, VIP) */
+.plan-tier-badge {
+  display: inline-block;
+  background: var(--color-electric-purple);
+  color: var(--color-white);
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.plan-price {
+  font-size: 36px;
+  color: var(--color-cyan-blue);
+  font-weight: bold;
+  margin: 15px 0;
+}
+
+.plan-price span {
+  font-size: 16px;
+}
+
+/* ---------- 9. Founder card (About page) ---------- */
+.founder-card {
+  width: calc(100% - 30px);
+  max-width: 900px;
+  margin: 60px auto;
+  background: var(--color-deep-space);
+  border: 1px solid var(--color-cyan-blue);
+  border-radius: 20px;
+  display: flex;
+  overflow: hidden;
+  color: var(--color-white);
+  font-family: sans-serif;
+}
+
+.founder-image-box {
+  width: 320px;
+  position: relative;
+  background: var(--color-cyan-blue);
+}
+
+.founder-image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.founder-badge {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  background: var(--color-electric-purple);
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.founder-content {
+  flex: 1;
+  padding: 30px;
+}
+
+.founder-content h2 {
+  font-size: 32px;
+  margin: 0;
+}
+
+.founder-title {
+  color: var(--color-electric-purple);
+  margin: 5px 0 20px 0;
+  font-weight: bold;
+}
+
+.founder-quote {
+  border-left: 3px solid var(--color-electric-purple);
+  padding-left: 15px;
+  font-style: italic;
+  color: var(--color-text-soft);
+  margin-bottom: 20px;
+}
+
+.founder-bio {
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+.founder-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px 30px;
+  margin: 25px 0;
+  border-top: 1px solid var(--color-cyan-blue);
+  border-bottom: 1px solid var(--color-cyan-blue);
+  padding: 20px 0;
+}
+
+.founder-stats strong {
+  display: block;
+  font-size: 22px;
+  color: var(--color-white);
+}
+
+.founder-stats span {
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.founder-socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: center;
+}
+
+.founder-socials a {
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.founder-socials .founder-contact-btn {
+  margin-left: auto;
+  background: var(--color-electric-purple);
+  color: var(--color-white);
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+/* ---------- 10. Payment page ---------- */
+.payment-note {
+  color: var(--color-text-muted);
+  font-size: 14px;
+}
+
+.payment-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px 20px 40px;
+}
+
+.payment-panel {
+  flex: 1 1 340px;
+  min-width: 0;
+  background: var(--color-surface);
+  border: 1px solid var(--color-cyan-blue);
+  border-radius: 15px;
+  padding: 25px;
+}
+
+.payment-panel h2 {
+  color: var(--color-cyan-blue);
+  margin-top: 0;
+}
+
+.form-field {
+  margin-bottom: 18px;
+}
+
+.form-field label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
+  color: var(--color-text-soft);
+}
+
+.form-field input,
+.form-field select {
+  width: 100%;
+  padding: 12px;
+  background: var(--color-deep-space);
+  color: var(--color-white);
+  border: 1px solid var(--color-line);
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: inherit;
+}
+
+.form-field input:focus,
+.form-field select:focus {
+  border-color: var(--color-cyan-blue);
+}
+
+.form-field input[aria-invalid="true"],
+.form-field select[aria-invalid="true"] {
+  border: 2px solid var(--color-electric-purple);
+}
+
+/* Error text shown under a field that failed validation */
+.form-error {
+  margin: 6px 0 0;
+  padding: 8px 10px;
+  background: rgba(138, 43, 226, 0.25);
+  border-left: 3px solid var(--color-electric-purple);
+  font-size: 14px;
+}
+
+/* Checkbox list of packages */
+.package-options {
+  border: none;
+  padding: 0;
+  margin: 0 0 18px;
+  min-width: 0;
+}
+
+.package-options legend {
+  padding: 0;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: var(--color-text-soft);
+}
+
+.package-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  margin-bottom: 8px;
+  border: 1px solid var(--color-line);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.package-option:hover,
+.package-option:has(input:checked) {
+  border-color: var(--color-cyan-blue);
+}
+
+.package-option input {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  accent-color: var(--color-cyan-blue);
+}
+
+.package-option-name {
+  flex: 1;
+}
+
+.package-option-price {
+  color: var(--color-cyan-blue);
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+/* Quote table */
+.quote-placeholder {
+  color: var(--color-text-muted);
+}
+
+.quote-table-wrap {
+  overflow-x: auto;
+}
+
+.quote-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.quote-caption {
+  text-align: left;
+  color: var(--color-text-muted);
+  margin-bottom: 10px;
+}
+
+.quote-table th {
+  text-align: left;
+  color: var(--color-cyan-blue);
+  border-bottom: 2px solid var(--color-cyan-blue);
+  padding: 10px 8px;
+}
+
+.quote-table td {
+  padding: 10px 8px;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.quote-table th:not(:first-child),
+.quote-table td:not(:first-child) {
+  text-align: right;
+}
+
+.quote-table td:not(:first-child) {
+  white-space: nowrap;
+}
+
+.quote-total td {
+  color: var(--color-cyan-blue);
+  font-size: 18px;
+  font-weight: bold;
+  border-top: 2px solid var(--color-cyan-blue);
+}
+
+/* Confirmation shown after a valid booking request */
+.form-message {
+  margin: 20px 0 0;
+  padding: 15px;
+  border: 1px solid var(--color-cyan-blue);
+  border-radius: 8px;
+  background: var(--color-surface);
+  line-height: 1.5;
+}
+
+/* ---------- 11. Responsive (tablet and phone) ---------- */
+@media (max-width: 768px) {
+  .plan-card--featured {
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 700px) {
+  .founder-card {
+    flex-direction: column;
+    margin: 40px auto;
+  }
+
+  .founder-image-box {
+    width: 100%;
+    height: 350px;
+  }
+
+  .founder-content {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .site-nav {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .site-nav-links {
+    justify-content: center;
+  }
+
+  .image-gallery img {
+    width: 100%;
+    height: 180px;
+  }
+
+  .package-grid {
+    padding: 20px 15px;
+  }
+
+  .plans-title {
+    font-size: 26px;
+  }
+
+  .payment-panel {
+    padding: 18px 14px;
+  }
+
+  .quote-table {
+    font-size: 14px;
+  }
+
+  .quote-table th,
+  .quote-table td {
+    padding: 8px 4px;
+  }
+
+  .quote-total td {
+    font-size: 16px;
+  }
+
+  .form-actions .btn-primary,
+  .form-actions .btn-outline {
+    width: 100%;
+    text-align: center;
+  }
+}
